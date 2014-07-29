@@ -55,6 +55,7 @@ class BookmarkManager < Sinatra::Base
 	end
 
 	get '/sessions/new' do
+		@path = request.path_info
 		erb :"sessions/new"
 	end
 

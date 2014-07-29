@@ -1,14 +1,31 @@
 <html>
 <head>
+	<link href="/stylesheets/reset.css" rel="stylesheet">
+	<link href="/stylesheets/stylesheet.css" rel="stylesheet">
 </head>
 <body>
-  <% if current_user %>
-    Welcome, <%= current_user.email %>
-    <form method="post" action="/sessions">
-      <input type="hidden" name="_method" value="delete">
-      <input type="submit" value="Sign out">
-    </form>
-  <% end %>
+<header>
+	<div id="logo">Bookmark Manager</div>
+	<div id="user-links">
+		<%if current_user %>
+			<span id="welcome-message">Welcome, <%= current_user.email %></span>
+
+			<form id="sign-out" method="POST" action="/sessions">
+			<input type="hidden" name="_method" value="delete">
+			<input type="submit" value="Sign out">
+			</form>
+		<%else %>
+			<% if request.path_info == '/sessions/new' %>
+				<a href="/users/new"><button>Sign up</button></a>
+			<% elsif request.path_info == '/users/new' %>
+				<a href="/sessions/new"><button>Sign in</button></a>
+			<%else%>
+				<a href="/sessions/new"><button>Sign in</button></a>
+				<a href="/users/new"><button>Sign up</button></a>
+			<%end%>
+		<% end %>
+	</div>
+</header>
 
   <% if flash[:errors] && !flash[:errors].empty? %>
 	  Sorry, there were the following problems with the form. 

@@ -1,0 +1,17 @@
+body {
+	background-color: skyblue;
+}
+
+header {
+	background-color: black;
+	color: white;
+	padding: 10px;
+	font-family: Helvetica;
+	font-size: 35px;
+}
+
+header #logo {
+  margin: auto 0;
+  display: flex;  
+  font-family: Helvetica, Arial, Sans-serif;
+}
