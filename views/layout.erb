@@ -4,7 +4,7 @@
 	<link href="/stylesheets/stylesheet.css" rel="stylesheet">
 </head>
 <body>
-<header>
+<header class="clearfix">
 	<div id="logo">Bookmark Manager</div>
 	<div id="user-links">
 		<%if current_user %>
@@ -23,6 +23,9 @@
 				<a href="/sessions/new"><button>Sign in</button></a>
 				<a href="/users/new"><button>Sign up</button></a>
 			<%end%>
+		<% end %>
+		<%unless request.path_info == '/links/new' %>
+			<a href="/links/new"><button class="highlighted">Add link</button></a> 
 		<% end %>
 	</div>
 </header>

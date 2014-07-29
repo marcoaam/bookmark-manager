@@ -1,14 +1,17 @@
-<ul>
+<h2>Welcome to the Bookmark Manager</h2>
+<div id='links-container'>
+	<ul >
   <% @links.each do |link| %>
-    <li><a href="<%= link.url %>"><%= link.title %></a></li>
+    <li class='link'>
+  <a class='title' href="<%= link.url %>"><%= link.title %></a>
+  <div class='description'>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </div>
+  <span class='source'>
+    added yesterday by 
+    <a href="#">evgeny@makersacademy.com</a>
+  </span>
+</li>
   <% end %>
-</ul>
-
-<div id="new-link">
-  <form action="/links" method="post">
-    Url: <input type="text" name="url">
-    Title: <input type="text" name="title">
-    Tags: <input type="text" name="tags">
-    <input type="submit" value="Add link">
-  </form>
+	</ul>
 </div>

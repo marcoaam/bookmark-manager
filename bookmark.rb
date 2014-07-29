@@ -55,7 +55,6 @@ class BookmarkManager < Sinatra::Base
 	end
 
 	get '/sessions/new' do
-		@path = request.path_info
 		erb :"sessions/new"
 	end
 
@@ -75,6 +74,10 @@ class BookmarkManager < Sinatra::Base
 		session[:user_id] = nil
 		flash[:notice] = "Good bye!"
 		redirect to('/')
+	end
+
+	get '/links/new' do
+		erb :"links/new"
 	end
 
 	helpers do
