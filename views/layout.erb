@@ -5,14 +5,14 @@
 </head>
 <body>
 <header class="clearfix">
-	<div id="logo">Bookmark Manager</div>
+	<div id="logo">Bookmark Manager</div><br>
 	<div id="user-links">
 		<%if current_user %>
 			<span id="welcome-message">Welcome, <%= current_user.email %></span>
 
 			<form id="sign-out" method="POST" action="/sessions">
 			<input type="hidden" name="_method" value="delete">
-			<input type="submit" value="Sign out">
+			<input id="sign-out-btn" type="submit" value="Sign out">
 			</form>
 		<%else %>
 			<% if request.path_info == '/sessions/new' %>

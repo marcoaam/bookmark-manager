@@ -9,17 +9,23 @@ header {
 	color: white;
 	padding: 10px;
 	font-family: Helvetica;
-	font-size: 35px;
 	margin-bottom: 20px;
+}
+
+#welcome-message {
+	font-size: 18px;
+	display: inline-block;
 }
 
 #logo {
 	display: inline-block;
 	float: left;  
   font-family: Helvetica, Arial, Sans-serif;
+ 	font-size: 35px;
+ 	margin: 10px;
 }
 
-button {
+button, #sign-out-btn {
   display: inline-block; /* display inline but have dimensions */
   width: 80px;
   background-color: #82B743;
