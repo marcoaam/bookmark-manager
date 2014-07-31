@@ -65,3 +65,21 @@ feature 'User signs out' do
   end
 
 end
+
+feature 'User recovers forgotten password' do
+
+  before(:each) do
+    User.create(:email => "marco.army@gmail.com", 
+                :password => 'test', 
+                :password_confirmation => 'test')
+  end
+
+  scenario 'recover password providing the email' do
+    sign_in('marco.army@gmail.com', 'wrong')
+    click_link "Forgot password?"
+    fill_in "email", :with => "marco.army@gmail.com"
+    click_button "Recover Password"
+    expect(page).to have_content("A email has been sent with a temporary password")
+  end
+
+end

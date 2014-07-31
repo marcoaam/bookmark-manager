@@ -5,8 +5,8 @@ require './lib/link'
 require './lib/tag'
 require './lib/user'
 require './app/data_mapper_setup'
-
-
+require './lib/send_email'
+require 'rest-client'
 
 class BookmarkManager < Sinatra::Base
 
@@ -39,6 +39,40 @@ class BookmarkManager < Sinatra::Base
 	get '/users/new' do
 		@user = User.new
 		erb :"users/new"
+	end
+
+	get '/users/recover-password' do
+		erb :"users/recover-password"
+	end
+
+	post '/users/recover-password' do
+		user = User.first(:email => params[:email])
+		if user
+			user.password_token = (1..64).map{('A'..'Z').to_a.sample}.join
+			user.password_token_timestamp = Time.now
+			user.save
+			send_simple_message(user)
+			flash[:notice] = "A email has been sent with a temporary password, check your inbox and follow instructions"
+			redirect to('/')
+		else
+			flash[:notice] = "Email not valid"
+			redirect to('/users/recover-password')
+		end
+	end
+
+	get '/users/reset-password/:token' do
+		@token = params[:token]
+		erb :"users/change-password"
+	end
+
+	post '/users/set-new-password' do
+		user = User.first(:password_token => params[:token])
+		user.update(:password => params[:password],
+								:password_confirmation => params[:password_confirmation],
+								:password_token => nil,
+								:password_token_timestamp => nil)
+		flash[:notice] = "Password succesfully changed, you can sign in with your password now"
+		redirect to("/")
 	end
 
 	post '/users' do
